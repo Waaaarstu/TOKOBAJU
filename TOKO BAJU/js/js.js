@@ -51,19 +51,19 @@ fetch("./api/products.php")
   })
   .catch((error) => console.error("Error fetching products:", error));
 
-  fetch("./api/products.php")
-    // Pastikan path API sudah sesuai
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Failed to fetch products");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      products = data; // Simpan data produk ke dalam variabel global
-      renderButtonProducts();
-    })
-    .catch((error) => console.error("Error fetching products:", error));
+fetch("./api/products.php")
+  // Pastikan path API sudah sesuai
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Failed to fetch products");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    products = data; // Simpan data produk ke dalam variabel global
+    renderButtonProducts();
+  })
+  .catch((error) => console.error("Error fetching products:", error));
 
 // Fungsi untuk merender produk ke dalam elemen dengan ID "root"
 function renderProducts() {
@@ -80,12 +80,13 @@ function renderProducts() {
                       <p class="fashion-card-price">IDR ${harga}</p>
                   </div>
               </a>
-              <button class='add-to-cart' onclick='addToCart(${id})' id='addToCart'>Add to Cart</button>
+              <button class='add-to-cart' onclick='addToCart(${id})'>Add to Cart</button>
           </div>
       `;
     })
     .join("");
 }
+
 function getProductIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return parseInt(params.get("id"), 10); // Mengambil parameter "id" sebagai angka
@@ -102,22 +103,21 @@ function renderButtonProducts() {
   if (product) {
     // Jika produk ditemukan, tampilkan tombol
     root.innerHTML = `
-      <button class='add-to-cart' onclick='addToCart(${product.id})' id='addToCart' >
-        Add to Cart 
-      </button>
-    `;
+        <button class='add-to-cart' onclick='addToCart(${product.id})' id='addToCart' >
+          Add to Cart 
+        </button>
+      `;
   } else {
     // Jika tidak ada produk dengan ID tersebut
     root.innerHTML = "<p>Product not found!</p>";
   }
 }
 
-renderButtonProducts();
+// renderButtonProducts();
 function addToCart(productId) {
   alert(`Product ${productId} added to cart!`);
 }
 
-// Panggil fungsi saat halaman di-load
 // Fungsi untuk menambahkan produk ke keranjang
 // Variabel global
 // let cart = [];
@@ -126,14 +126,14 @@ function addToCart(productId) {
 // Fungsi untuk memuat produk dan inisialisasi
 function initializeApp() {
   // Muat produk dari localStorage jika tersedia
-  const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+  const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
   cart = savedCart;
 
   // Ambil data produk dari REST API PHP
-  fetch('./api/products.php')
+  fetch("./api/products.php")
     .then((response) => {
       if (!response.ok) {
-        throw new Error('Failed to fetch products');
+        throw new Error("Failed to fetch products");
       }
       return response.json();
     })
@@ -143,8 +143,8 @@ function initializeApp() {
       displayCart(); // Tampilkan keranjang yang tersimpan
     })
     .catch((error) => {
-      console.error('Error fetching products:', error);
-      alert('Gagal memuat produk');
+      console.error("Error fetching products:", error);
+      //   alert('Gagal memuat produk');
     });
 }
 
@@ -152,21 +152,21 @@ function initializeApp() {
 function addToCart(productId) {
   // Pastikan products array tersedia
   if (!products || products.length === 0) {
-    console.error('Produk tidak ditemukan');
+    console.error("Produk tidak ditemukan");
     return;
   }
 
   // Temukan produk berdasarkan ID
   const product = products.find((item) => item.id === productId);
-  
+
   if (!product) {
-    console.error('Produk tidak ditemukan dengan ID:', productId);
+    console.error("Produk tidak ditemukan dengan ID:", productId);
     return;
   }
 
   // Ambil keranjang dari localStorage
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
   // Cari apakah produk sudah ada di keranjang
   const existingItemIndex = cart.findIndex((item) => item.id === productId);
 
@@ -175,33 +175,33 @@ function addToCart(productId) {
     cart[existingItemIndex].qty += 1;
   } else {
     // Jika produk baru, tambahkan ke keranjang dengan qty 1
-    cart.push({ 
-      ...product, 
-      qty: 1 
+    cart.push({
+      ...product,
+      qty: 1,
     });
   }
 
   // Simpan kembali ke localStorage
   try {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    console.log('Cart berhasil disimpan:', cart);
-    
+    localStorage.setItem("cart", JSON.stringify(cart));
+    console.log("Cart berhasil disimpan:", cart);
+
     // Perbarui tampilan keranjang
     displayCart();
-    
+
     alert("Barang Berhasil Ditambahkan");
   } catch (error) {
-    console.error('Gagal menyimpan ke localStorage:', error);
-    alert('Gagal menambahkan barang ke keranjang');
+    console.error("Gagal menyimpan ke localStorage:", error);
+    alert("Gagal menambahkan barang ke keranjang");
   }
 }
 
 // Fungsi untuk menampilkan keranjang
 function displayCart() {
   // Ambil data keranjang dari localStorage
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
-  console.log('Keranjang saat ini:', cart); // Debug log
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  console.log("Keranjang saat ini:", cart); // Debug log
 
   let total = 0;
   document.getElementById("count").innerHTML = cart.length;
@@ -238,12 +238,12 @@ function displayCart() {
 }
 
 // Jalankan inisialisasi saat halaman dimuat
-document.addEventListener('DOMContentLoaded', initializeApp);
+document.addEventListener("DOMContentLoaded", initializeApp);
 // Fungsi untuk menghapus item dari keranjang
 function removeFromCart(index) {
   // Ambil keranjang dari localStorage
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
   // Jika item memiliki qty lebih dari 1, kurangi qty
   // Jika qty adalah 1, hapus item sepenuhnya
   if (cart[index].qty > 1) {
@@ -255,22 +255,44 @@ function removeFromCart(index) {
 
   // Simpan kembali ke localStorage
   try {
-    localStorage.setItem('cart', JSON.stringify(cart));
-    
+    localStorage.setItem("cart", JSON.stringify(cart));
+
     // Perbarui tampilan keranjang
     displayCart();
-    
-    console.log('Item berhasil dihapus:', cart);
+
+    console.log("Item berhasil dihapus:", cart);
   } catch (error) {
-    console.error('Gagal menghapus item dari keranjang:', error);
-    alert('Gagal menghapus barang dari keranjang');
+    console.error("Gagal menghapus item dari keranjang:", error);
+    alert("Gagal menghapus barang dari keranjang");
   }
 }
 
-// Membuat elemen HTML menggunakan template literal
-const buttonHTML = `
-  <button class='add-to-cart' onclick='addToCart(${id})' id='addToCart'>Add to Cart</button>
-`;
+// Fungsi untuk melakukan checkout via WhatsApp
+function checkout() {
+  if (cart.length === 0) {
+    alert("Keranjang kosong, silakan tambahkan barang terlebih dahulu!");
+    return;
+  }
 
-// Menambahkan elemen ke dalam container
-document.getElementById("button-container").innerHTML = buttonHTML;
+  let message = "Halo, saya ingin memesan:\n";
+  let totalHarga = 0;
+
+  cart.forEach((item) => {
+    message += `- ${item.nama} (x${item.qty}) - IDR ${item.harga * item.qty}\n`;
+    totalHarga += item.harga * item.qty;
+  });
+
+  message += `\nTotal: IDR ${totalHarga}.00\n`;
+  message += "Terima kasih!";
+
+  const whatsappUrl = `https://wa.me/6287855253572?text=${encodeURIComponent(
+    message
+  )}`;
+  window.open(whatsappUrl, "_blank");
+}
+
+// const productss = {
+//   1: { name: 'Product 1', description: 'Description for Product 1.' },
+//   2: { name: 'Product 2', description: 'Description for Product 2.' },
+//   3: { name: 'Product 3', description: 'Description for Product 3.' }
+// };
