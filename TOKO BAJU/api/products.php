@@ -4,19 +4,19 @@ header('Content-Type: application/json; charset=utf-8');
 
 // Data produk simulasi (dapat diganti dengan query database)
 $products = [
-  [
+  1 => [
     "id" => 1,
-    "nama" => "Blue shirt",
-    "ukuran" => "XXL",
+    "nama" => "Blue Shirt",
+    "size" => "Size = XXL",
     "description" => "Kemeja Biru premium dengan bahan berkualitas tinggi",
     "harga" => 30000,
     "gambar" => "img/menu/kemejaBiru.jpg",
     "detail" => "Kemeja biru elegan cocok untuk acara formal maupun kasual. Dibuat dari bahan katun berkualitas."
   ],
-  [
+  2 => [
     "id" => 2,
     "nama" => "Blue T-Shirt",
-    "ukuran" => "M",
+    "size" => "Size = M",
     "description" => "Kaos Biru casual",
     "harga" => 40000,
     "gambar" => "img/menu/kaosbiru.jpg",
@@ -25,7 +25,7 @@ $products = [
   [
     "id" => 3,
     "nama" => "Cream Shorts",
-    "ukuran" => "30",
+    "size" => "Size = 30",
     "description" => "Kaos Biru casual",
     "harga" => 50000,
     "gambar" => "img/menu/CelanaPndekCream.jpg",
@@ -54,7 +54,7 @@ $products = [
     "nama" => "Black Shorts",
     "size" => "Size = XL",
     "description" => "Kaos Biru casual",
-    "harga" => 40000,
+    "harga" => 45000,
     "gambar" => "img/menu/CelanaPndekHitam.jpg",
     "detail" => "T-shirt nyaman dengan warna biru yang fresh, pas untuk gaya sehari-hari." 
   ],
@@ -114,22 +114,18 @@ $products = [
   ]
   // Tambahkan produk lainnya sesuai dengan data di products.php
 ];
-// Cek apakah parameter ID diberikan
-if (isset($_GET['id'])) {
-  $productId = intval($_GET['id']);
-  
-  // Cari produk berdasarkan ID
-  if (isset($products[$productId])) {
-    echo json_encode($products[$productId]);
-    exit;
-  } else {
-    http_response_code(404);
-    echo json_encode(["error" => "Produk tidak ditemukan"]);
-    exit;
-  }
-} else {
-  // Jika tidak ada ID, kembalikan semua produk
-  echo json_encode(array_values($products));
+if (isset($_GET['q'])) {
+  $query = strtolower(trim($_GET['q'])); // Normalisasi input pencarian
+  $filteredProducts = array_filter($products, function($product) use ($query) {
+      return strpos(strtolower($product['nama']), $query) !== false; // Pencarian case-insensitive
+  });
+
+  echo json_encode(array_values($filteredProducts)); // Kembalikan hasil pencarian
   exit;
 }
+
+// Kembalikan semua produk jika tidak ada parameter 'q'
+echo json_encode(array_values($products));
+exit;
+
 ?>

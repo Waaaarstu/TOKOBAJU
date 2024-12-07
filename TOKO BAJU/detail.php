@@ -119,6 +119,7 @@ $products = [
   // Tambahkan produk lainnya sesuai dengan data di products.php
 ];
 
+
 // Cari produk berdasarkan ID
 $product = isset($products[$productId]) ? $products[$productId] : null;
 
@@ -142,7 +143,7 @@ if (!$product) {
     rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/sty.css" />
   <link rel="stylesheet" href="detailProducts/style.css" />
   <style>
     #root{
@@ -168,7 +169,6 @@ if (!$product) {
           <h1 class="product-name"><?= htmlspecialchars($product['nama']) ?></h1>
           <p class="product-price">IDR <?= number_format($product['harga'], 0, ',', '.') ?></p>
         </div>
-        <h3 class="product-size"><?= htmlspecialchars($product['size']) ?></h3>
         <p class="product-description">
         <?= htmlspecialchars($product['detail']) ?>
         </p>
@@ -184,19 +184,21 @@ if (!$product) {
   <!-- Footer -->
   <?php include 'php/footer.php'; ?>
 
-  <script src="js/js.js"></script>
+  <script src="js/test.js"></script>
   <script src="https://unpkg.com/feather-icons"></script>
   <script>
     feather.replace();
   </script>
-  <script>
-    const username = localStorage.getItem('username');
-    const password = localStorage.getItem('password');
+    <script>
+    // Cek apakah user sudah login dengan data di localStorage
+    const storedUsername = localStorage.getItem('username');
+    const storedPassword = localStorage.getItem('password');
 
-    // Jika tidak ada, redirect ke login.php
-    if (!username || !password) {
-      window.location.href = 'login.php';
-    } 
+    if (!storedUsername || !storedPassword) {
+      // Jika tidak ada data login, kembali ke login page
+      alert('Anda belum login! Mengarahkan ke halaman login...');
+      window.location.href = "login.php";
+    }
   </script>
 </body>
 

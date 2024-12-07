@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>fashion say'it</title>
+  <title>Busana Kita</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,10 +13,12 @@
     rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/sty.css" />
+
 </head>
 
 <body>
+
   <!-- Navbar Start -->
   <?php include 'php/navbar.php'; ?>
   <!-- Navbar End -->
@@ -94,57 +96,31 @@
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0022599156387!2d106.90846238900754!3d-6.2634310600895935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f32af6703c71%3A0xf89cd7f58da5243f!2sUniversitas%20BSI%20Kampus%20Jatiwaringin!5e0!3m2!1sid!2sid!4v1731213697398!5m2!1sid!2sid"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
-        <form action="https://wa.me//+6287855253572">
-          <pre class="pre">
-                <div class="input-grup">
-                    <i data-feather="user"></i>
-                    <input type="text" placeholder="nama " required>
-                </div>
-                <div class="input-grup">
-                    <i data-feather="mail"></i>
-                    <input type="email" placeholder="email" required>
-                </div>
-                <div class="input-grup" >
-                    <i data-feather="phone"></i>
-                    <input type="number" placeholder="no hp" required>
-                </div>
-                <input type="submit" name="submit" value="Submit" class="btn">
-            </pre>
+        <form id="whatsappForm">
+          <div class="input-grup">
+            <i data-feather="user"></i>
+            <input type="text" id="name" placeholder="Nama" required>
+          </div>
+          <div class="input-grup">
+            <i data-feather="mail"></i>
+            <input type="email" id="email" placeholder="Email" required>
+          </div>
+          <div class="input-grup">
+            <i data-feather="phone"></i>
+            <input type="number" id="phone" placeholder="No HP" required>
+          </div>
+          <button type="submit" class="btn">Submit</button>
         </form>
+
       </div>
     </div>
   </section>
+
   <!-- Contact Section End -->
 
   <!-- Footer Start -->
   <?php include 'php/footer.php'; ?>
   <!-- Footer End -->
-
-  <!-- login start-->
-  <?php
-session_start();
-// Dummy username dan password yang terdaftar di database
-$registered_username = "user";
-$registered_password = "password";
-
-// Jika form login di-submit
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Cek apakah username dan password sesuai
-    if ($username == $registered_username && $password == $registered_password) {
-        // Set session untuk pengguna yang login
-        $_SESSION['username'] = $username;
-        header("Location: dashboard.php"); // Redirect ke halaman dashboard atau halaman lainnya
-        exit();
-    } else {
-        echo "Username atau password salah!";
-    }
-}
-?>
-
-  <!-- login end-->
 
   <!-- Feather Icons -->
   <script src="https://unpkg.com/feather-icons"></script>
@@ -152,18 +128,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     feather.replace();
   </script>
 
-  <!-- Custom JavaScript -->
-  <script src="js/js.js"></script>
-  <script>
-    
-    // Fungsi logout
-    function logout() {
-      localStorage.removeItem('username');
-      localStorage.removeItem('password');
+  <!-- <script>
+    const email = localStorage.getItem('email');
+    const password = localStorage.getItem('password');
 
-      window.location.href = "login.php"; //balik ke laman login
-    }
-    
+    // Jika tidak ada, redirect ke login.php
+    if (!email || !password) {
+      window.location.href = 'login.php';
+    } 
+  </script> -->
+
+  <!-- Custom JavaScript -->
+  <script src="js/test.js ">
+    // Periksa apakah 'email' dan 'password' ada di localStorage
+  </script>
+
+  <script>
     // Cek apakah user sudah login dengan data di localStorage
     const storedUsername = localStorage.getItem('username');
     const storedPassword = localStorage.getItem('password');
@@ -174,12 +154,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       window.location.href = "login.php";
     }
   </script>
+
+
   <script>
-    // buat username dari localStorage dan menampilkannya
-    const username = localStorage.getItem('username');
-    document.getElementById('usernameDisplay').innerText = username : 'Guest';
+    function logout() {
+      // Hapus data login dari localStorage dan kembali ke halaman login
+      localStorage.removeItem('username');
+      localStorage.removeItem('password');
+      alert('Anda telah logout!');
+      window.location.href = "login.php";
+    }
   </script>
 
 </body>
-ame ? u
+
 </html>

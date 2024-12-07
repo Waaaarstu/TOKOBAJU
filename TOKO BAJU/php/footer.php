@@ -18,6 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
     <!-- Stylesheet -->
+    <link rel="stylesheet" href="../css/styles.css" />
     <style>
         /* footer  */
         footer {
@@ -65,9 +66,10 @@
 <body>
     <footer>
         <div class="social">
+            <a href="https://www.instagram.com/waaaqiuti/"><i data-feather="instagram"></i></a>
             <a href="https://www.instagram.com/said.hirzi/"><i data-feather="instagram"></i></a>
-            <a href="https://www.instagram.com/said.hirzi/"><i data-feather="twitter"></i></a>
             <a href="https://web.facebook.com/hirzisaid/"><i data-feather="facebook"></i></a>
+            <a href="https://www.twitch.tv/waaaa01"><i data-feather="twitch"></i></a>
         </div>
         <div class="links">
             <a href="#home">home</a>
@@ -76,7 +78,7 @@
             <a href="#contact">contact</a>
         </div>
         <div class="credit">
-            <p>created by <a href="#">kelompok1</a>. | &copy; 2024.</p>
+            <p>created by <a href="#">kelompok 5</a>. | &copy; 2024.</p>
         </div>
     </footer>
 

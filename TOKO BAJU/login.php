@@ -242,7 +242,7 @@
                 const currentPage = window.location.pathname.split('/').pop();
 
                 // Jika user berada di halaman login, arahkan ke index.php
-                if (currentPage === 'login.html') {
+                if (currentPage === 'login.php') {
                     window.location.href = "/TOKO%20BAJU/index.php";
                 }
             }
